@@ -1,46 +1,33 @@
-def Horner_value(x, values, lenght):
-    final_value = 0
-    for i in range(lenght):
-        final_value = final_value * x + values[i]
-    return final_value
+import math_helper as mt
 
-
-def bisekcja(a, b, wspolczynniki):
-    x = (a + b / 2)
-    while Horner_value(x, wspolczynniki, len(wspolczynniki)) != 0:
-        value_of_b = Horner_value(b, wspolczynniki, len(wspolczynniki))
-        value_of_x = Horner_value(x, wspolczynniki, len(wspolczynniki))
-        if (value_of_b < 0 & value_of_x < 0) | (value_of_b > 0 & value_of_x > 0):
-            b = x
-        else:
-            a = x
-        x = (a + b / 2)
-
-    return x
-
-
-
-
-czy_dziala=True
+czy_dziala = True
 while czy_dziala:
-    jakaFunkcja = input("Jaka funkcje wybierasz? \n W - wielomian; \n T - trygonometryczna \n E - Wykładnicza \n Z - zlozona \n Q - wyjście")
-    if jakaFunkcja == 'Q' or jakaFunkcja=='q':
-        czy_dziala=False
+    jakaFunkcja = input("Jaka funkcje wybierasz? \n "
+                        "1 - wielomian: y=x^{4}-4x^{3}+8x^{2}-23; \n "
+                        "2 - 2sin(x) + x^2 \n "
+                        "3 - cos(x) \n "
+                        "4 - 3^x -3 \n "
+                        "5 - x^2 * 2cos(x) \n "
+                        "q - wyjście\n")
+    if jakaFunkcja == 'Q' or jakaFunkcja == 'q':
+        czy_dziala = False
     else:
-        jakieOgraniczenie = float(input("\n Warunek konca"))
-        if jakaFunkcja == 'W' or jakaFunkcja=='w':
-            # wpisywanie wspolczynnikow
-            lenght = int(input("Podaj najwyzsza potege wielomianu"))
-            values = []
+        jakieOgraniczenie = input("\n Warunek konca: \n 1 - liczba iteracji \n 2 - Wariant A\n")
+        if jakieOgraniczenie == '1':
+            liczbaIteracji = int(input("\n Podaj liczbe iteracji\n"))
+        if jakieOgraniczenie == '2':
+            epsilon = float(input("\n Podaj epsilon\n"))
+        przedzial_a = float(input("\n Podaj poczatek przedzialu "))
+        przedzial_b = float(input("\n Podaj koniec przedzialu "))
 
-            for i in range(lenght + 1):
-                values.append(int(input("Podaj wspolczynnik do x^" + str(i))))
+        if jakaFunkcja == '1':
+            pass
 
-            # wpisanie x
-            x = int(input("Podaj wartosc x"))
-        if jakaFunkcja == 'T' or jakaFunkcja == 't':
+        if jakaFunkcja == '2':
             pass
-        if jakaFunkcja == 'E' or jakaFunkcja=='e':
+        if jakaFunkcja == '3':
             pass
-        if jakaFunkcja == 'Z' or jakaFunkcja=='z':
+        if jakaFunkcja == '4':
+            pass
+        if jakaFunkcja == '5':
             pass
