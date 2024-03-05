@@ -4,7 +4,7 @@ czy_dziala = True
 while czy_dziala:
     jakaFunkcja = input("Jaka funkcje wybierasz? \n "
                         "1 - wielomian: y=x^{4}-4x^{3}+8x^{2}-23; \n "
-                        "2 - 2sin(x) + x^2 \n "
+                        "2 - 2sin(x) * x^2 \n "
                         "3 - cos(x) \n "
                         "4 - 3^x -3 \n "
                         "5 - x^2 * 2cos(x) \n "
