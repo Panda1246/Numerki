@@ -47,14 +47,15 @@ def bisection_for_iteration(a, b, function, iteration):
             a=x
         x = (a + b / 2)
     return x, i+1
-'''
-def bisection(a, b, wspolczynniki, eps):
+
+def bisection_for_variant(a, b, function, eps):
     x = (a + b / 2)
+    value_of_x = value(x, function)
     previous_x = None
-    while Horner_value(x, wspolczynniki, len(wspolczynniki)) != 0 or stop_flag == True:
+    while value_of_x != 0 or stop_flag == True:
         stop_flag = False
-        value_of_b = Horner_value(b, wspolczynniki, len(wspolczynniki))
-        value_of_x = Horner_value(x, wspolczynniki, len(wspolczynniki))
+        value_of_b = value(b, function)
+        value_of_x = value(x, function)
         if (value_of_b < 0 & value_of_x < 0) | (value_of_b > 0 & value_of_x > 0):
             b = x
         else:
@@ -67,7 +68,7 @@ def bisection(a, b, wspolczynniki, eps):
             previous_x = x
     return x
 
-'''
+
 def break_statement(eps, x, xi):
     if math.fabs(x - xi) < eps:
         return True
