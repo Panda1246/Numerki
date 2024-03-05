@@ -52,8 +52,8 @@ def bisection_for_variant(a, b, function, eps):
     x = (a + b / 2)
     value_of_x = value(x, function)
     previous_x = None
+    stop_flag = False
     while value_of_x != 0 or stop_flag == True:
-        stop_flag = False
         value_of_b = value(b, function)
         value_of_x = value(x, function)
         if (value_of_b < 0 & value_of_x < 0) | (value_of_b > 0 & value_of_x > 0):
@@ -75,3 +75,5 @@ def break_statement(eps, x, xi):
     else:
         return False
 
+def secant_method_iteration(a,b, function, iteration):
+    pass
