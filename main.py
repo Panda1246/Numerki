@@ -7,7 +7,7 @@ while czy_dziala:
                         "2 - 2sin(x) * x^2 \n "
                         "3 - cos(x) \n "
                         "4 - 3^x -3 \n "
-                        "5 - x^2 * 2cos(x) \n "
+                        "5 - 2cos(x^2) \n "
                         "q - wyjście\n")
     if jakaFunkcja == 'Q' or jakaFunkcja == 'q':
         czy_dziala = False
