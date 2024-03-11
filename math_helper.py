@@ -33,7 +33,7 @@ def value(x, function):
         return function_5(x)
 
 def bisection_for_iteration(a, b, function, iteration):
-    x = (a + b / 2)
+    x = (a + b )/2
     for i in range(iteration):
         value_of_x = value(x, function)
         value_of_b = value(b, function)
@@ -43,7 +43,7 @@ def bisection_for_iteration(a, b, function, iteration):
             b = x
         else:
             a=x
-        x = (a + b / 2)
+        x = (a + b)/2
     return -1, x, iteration
 
 def bisection_for_variant(a, b, function, eps):
@@ -64,7 +64,7 @@ def bisection_for_variant(a, b, function, eps):
                 stop_flag = True
         elif previous_x is None:
             previous_x = x
-    return x #trzeba przerobić, żeby zadziałało, chociaż to chyba zawsze wartość zwróci, chyba że złe punkty początkowe będą, na to trzeba poprawke imo zrobić
+    return x
 
 
 def secant_method_iteration(a,b, function, iteration):
@@ -87,8 +87,16 @@ def secant_method_variant(a,b, function, eps):
     x = a - value_of_a * ((a - b) / (value_of_a - value_of_b))
     value_of_x = value(x, function)
     while stop_flag == True or value_of_x !=0:
+        value_of_a = value(a, function)
+        value_of_b = value(b, function)
+        x = a - value_of_a * ((a - b) / (value_of_a - value_of_b))
+        value_of_x = value(x, function)
+        if break_statement(eps, x, a) is True:
+            stop_flag = True
+        b = a
+        a = x
+    return x
 
-    value
 def break_statement(eps, x, xi):
     if math.fabs(x - xi) < eps:
         return True

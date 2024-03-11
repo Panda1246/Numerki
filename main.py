@@ -12,22 +12,22 @@ while czy_dziala:
     if jakaFunkcja == 'Q' or jakaFunkcja == 'q':
         czy_dziala = False
     else:
+        przedzial_a = float(input("\n Podaj poczatek przedzialu "))
+        przedzial_b = float(input("\n Podaj koniec przedzialu "))
         jakieOgraniczenie = input("\n Warunek konca: \n 1 - liczba iteracji \n 2 - Wariant A\n")
         if jakieOgraniczenie == '1':
             liczbaIteracji = int(input("\n Podaj liczbe iteracji\n"))
+            wynik = mt.bisection_for_iteration(przedzial_a, przedzial_b, jakaFunkcja, liczbaIteracji)
+            print("Wynik bisekcja: ", wynik[0], " x: ", wynik[1], " iteracja: ", wynik[2])
+            wynik =  mt.secant_method_iteration(przedzial_a, przedzial_b, jakaFunkcja, liczbaIteracji)
+            print("Wynik metoda siecznych: ", wynik[0], " x: ", wynik[1], " iteracja: ", wynik[2])
         if jakieOgraniczenie == '2':
             epsilon = float(input("\n Podaj epsilon\n"))
-        przedzial_a = float(input("\n Podaj poczatek przedzialu "))
-        przedzial_b = float(input("\n Podaj koniec przedzialu "))
+            wynik = mt.bisection_for_variant(przedzial_a, przedzial_b, jakaFunkcja, epsilon)
+            print("Wynik  bisekcja: ", wynik[0], " x: ", wynik[1], " iteracja: ", wynik[2])
+            wynik = mt.secant_method_variant(przedzial_a, przedzial_b, jakaFunkcja, epsilon)
+            print("Wynik metoda siecznych: ", wynik[0], " x: ", wynik[1], " iteracja: ", wynik[2])
 
-        if jakaFunkcja == '1':
-            pass
 
-        if jakaFunkcja == '2':
-            pass
-        if jakaFunkcja == '3':
-            pass
-        if jakaFunkcja == '4':
-            pass
-        if jakaFunkcja == '5':
-            pass
+
+
