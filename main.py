@@ -1,5 +1,5 @@
 import math_helper as mt
-
+import matplotlib.pyplot as plt
 czy_dziala = True
 while czy_dziala:
     jakaFunkcja = input("Jaka funkcje wybierasz? \n "
@@ -14,20 +14,21 @@ while czy_dziala:
     else:
         przedzial_a = float(input("\n Podaj poczatek przedzialu "))
         przedzial_b = float(input("\n Podaj koniec przedzialu "))
-        jakieOgraniczenie = input("\n Warunek konca: \n 1 - liczba iteracji \n 2 - Wariant A\n")
-        if jakieOgraniczenie == '1':
-            liczbaIteracji = int(input("\n Podaj liczbe iteracji\n"))
-            wynik = mt.bisection_for_iteration(przedzial_a, przedzial_b, jakaFunkcja, liczbaIteracji)
-            print("Wynik bisekcja: ", wynik[0], " x: ", wynik[1], " iteracja: ", wynik[2])
-            wynik =  mt.secant_method_iteration(przedzial_a, przedzial_b, jakaFunkcja, liczbaIteracji)
-            print("Wynik metoda siecznych: ", wynik[0], " x: ", wynik[1], " iteracja: ", wynik[2])
-        if jakieOgraniczenie == '2':
-            epsilon = float(input("\n Podaj epsilon\n"))
-            wynik = mt.bisection_for_variant(przedzial_a, przedzial_b, jakaFunkcja, epsilon)
-            print("Wynik  bisekcja: ", wynik[0], " x: ", wynik[1], " iteracja: ", wynik[2])
-            wynik = mt.secant_method_variant(przedzial_a, przedzial_b, jakaFunkcja, epsilon)
-            print("Wynik metoda siecznych: ", wynik[0], " x: ", wynik[1], " iteracja: ", wynik[2])
-
+        liczbaIteracji = int(input("\n Podaj liczbe iteracji\n"))
+        epsilon = float(input("\n Podaj epsilon\n"))
+        punkty_x=[]
+        punkty_y=[]
+        wynik = mt.bisection(przedzial_a, przedzial_b, jakaFunkcja, epsilon, liczbaIteracji)
+        print("Wynik bisekcja: ", wynik[0], "Liczba iteracji: ", wynik[1])
+        wynik = mt.secant_method(przedzial_a, przedzial_b, jakaFunkcja, epsilon, liczbaIteracji)
+        print("Wynik metoda siecznych: ", wynik[0], "Liczba iteracji: ", wynik[1])
+        var=(przedzial_b-przedzial_a)/1000
+        for i in range(1000):
+            punkty_x.append(var)
+            punkty_y.append(mt.value(var,jakaFunkcja))
+            var+=var
+        plt.plot(punkty_x, punkty_y)
+        plt.show()
 
 
 

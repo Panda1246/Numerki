@@ -1,104 +1,69 @@
 import math
 
+
 def function_1(x):
-    return x**4 - 4 * x**3 + 8 * x**2 - 23
+    return x ** 4 - 4 * x ** 3 + 8 * x ** 2 - 23
 
 
 def function_2(x):
-    return 2 * math.sin(x) * x**2
+    return 2 * math.sin(x) * x ** 2
 
 
 def function_3(x):
     return math.cos(x)
 
+
 def function_4(x):
-    return 3**x - 3
+    return 3 ** x - 3
 
 
 def function_5(x):
-    return 2*math.cos(x*x)
-
+    return 2 * math.cos(x * x)
 
 
 def value(x, function):
-    if function =='1':
+    if function == '1':
         return function_1(x)
-    elif function =='2':
+    elif function == '2':
         return function_2(x)
-    elif function =='3':
+    elif function == '3':
         return function_3(x)
-    elif function =='4':
+    elif function == '4':
         return function_4(x)
-    elif function =='5':
+    elif function == '5':
         return function_5(x)
 
-def bisection_for_iteration(a, b, function, iteration):
-    x = (a + b )/2
-    for i in range(iteration):
-        value_of_x = value(x, function)
-        value_of_b = value(b, function)
-        if value_of_x == 0:
-            return 0, x, i
-        elif (value_of_b < 0 and value_of_x<0) or (value_of_b > 0 and value_of_x>0):
-            b = x
-        else:
-            a=x
-        x = (a + b)/2
-    return -1, x, iteration
 
-def bisection_for_variant(a, b, function, eps):
-    x = (a + b / 2)
-    value_of_x = value(x, function)
-    previous_x = None
-    stop_flag = False
-    while value_of_x != 0 or stop_flag == True:
+def bisection(a, b, function, eps, iteration):
+    x = (a + b) / 2
+    previous_x = 0.0
+    i = 0
+    while math.fabs(x - previous_x) <= eps and i < iteration:
         value_of_b = value(b, function)
         value_of_x = value(x, function)
-        if (value_of_b < 0 & value_of_x < 0) | (value_of_b > 0 & value_of_x > 0):
+        if (value_of_b < 0.0 and value_of_x < 0.0) | (value_of_b > 0.0 and value_of_x > 0.0):
             b = x
         else:
             a = x
-        x = (a + b / 2)
-        if previous_x is not None:
-            if break_statement(eps, x, previous_x) is True:
-                stop_flag = True
-        elif previous_x is None:
-            previous_x = x
-    return x
+        previous_x = x
+        x = (a + b) / 2
+        i += 1
+    return x, i
 
 
-def secant_method_iteration(a,b, function, iteration):
-    for i in range(iteration):
-        value_of_a = value(a, function)
-        value_of_b = value(b, function)
-        x = a-value_of_a*((a-b)/(value_of_a-value_of_b))
-        value_of_x = value(x,function)
-        if value_of_x == 0:
-            return 0, x, i
-        b = a
-        a = x
-    return -1, x, iteration
-
-
-def secant_method_variant(a,b, function, eps):
-    stop_flag = False
+def secant_method(a, b, function, eps, iteration):
     value_of_a = value(a, function)
     value_of_b = value(b, function)
     x = a - value_of_a * ((a - b) / (value_of_a - value_of_b))
-    value_of_x = value(x, function)
-    while stop_flag == True or value_of_x !=0:
+    previous_x = 0.0
+    i = 0
+    while math.fabs(x - previous_x) <= eps and i < iteration:
         value_of_a = value(a, function)
         value_of_b = value(b, function)
+        previous_x = x
         x = a - value_of_a * ((a - b) / (value_of_a - value_of_b))
-        value_of_x = value(x, function)
-        if break_statement(eps, x, a) is True:
-            stop_flag = True
+
         b = a
         a = x
-    return x
-
-def break_statement(eps, x, xi):
-    if math.fabs(x - xi) < eps:
-        return True
-    else:
-        return False
+        i += 1
+    return x, i
