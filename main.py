@@ -16,21 +16,23 @@ while czy_dziala:
     else:
         przedzial_a = float(input("\n Podaj poczatek przedzialu "))
         przedzial_b = float(input("\n Podaj koniec przedzialu "))
-        liczbaIteracji = int(input("\n Podaj liczbe iteracji\n"))
-        epsilon = float(input("\n Podaj epsilon\n"))
+        wybor = input("\n 1 - ilosc literacji; 2 - dokladnosc \n")
+        if wybor == '1':
+            argument = int(input("\n Podaj liczbe iteracji\n"))
+        else:
+            argument = float(input("\n Podaj epsilon\n"))
         punkty_x = []
         punkty_y = []
-        wynik_bisekcja = mt.bisection(przedzial_a, przedzial_b, jakaFunkcja, epsilon, liczbaIteracji)
-        print("Wynik bisekcja: ", wynik_bisekcja[0], "Liczba iteracji: ", wynik_bisekcja[1])
-        wynik_sieczne = mt.secant_method(przedzial_a, przedzial_b, jakaFunkcja, epsilon, liczbaIteracji)
-        print("Wynik metoda siecznych: ", wynik_sieczne[0], "Liczba iteracji: ", wynik_sieczne[1])
+        wynik = mt.choose_your_method(przedzial_a, przedzial_b, jakaFunkcja, argument, wybor)
+        print("\n Bisekcja: " + str(wynik[0][0])+" liczba iteracji: "+str(wynik[0][1]))
+        print("\n Sieczne: " + str(wynik[1][0])+" liczba iteracji: "+str(wynik[1][1]))
         var = (przedzial_b - przedzial_a) / 1000
         for i in range(1000):
             przedzial_a += var
             punkty_x.append(przedzial_a)
             punkty_y.append(mt.value(przedzial_a, jakaFunkcja))
         plt.plot(punkty_x, punkty_y)
-        plt.scatter(wynik_bisekcja[0], 0, color='red', label='Bisekcja')
-        plt.scatter(wynik_sieczne[0], 0, color='blue', label='Sieczne')
+        plt.scatter(wynik[0][0], 0, color='red', label='Bisekcja')
+        plt.scatter(wynik[1][0], 0, color='blue', label='Sieczne')
         plt.legend()
         plt.show()
