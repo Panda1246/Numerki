@@ -1,8 +1,12 @@
 import math
 
-
-def function_1(x):
-    return (x ** 4) - (4 * (x ** 3)) + (8 * (x ** 2)) - 23
+def Horner_value(x, values, lenght):
+    final_value = 0
+    for i in range(lenght):
+        final_value = final_value * x + values[i]
+    return final_value
+def function_1(x, coffecients, length):
+    return Horner_value(x, coffecients, length)
 
 
 def function_2(x):
@@ -23,7 +27,7 @@ def function_5(x):
 
 def value(x, function):
     if function == '1':
-        return function_1(x)
+        return function_1(x, [1,-4,0,8,-23], 5)
     elif function == '2':
         return function_2(x)
     elif function == '3':
