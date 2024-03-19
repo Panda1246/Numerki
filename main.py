@@ -16,24 +16,27 @@ while czy_dziala:
     else:
         przedzial_a = float(input("\n Podaj poczatek przedzialu "))
         przedzial_b = float(input("\n Podaj koniec przedzialu "))
-        wybor = input("\n 1 - ilosc literacji; 2 - dokladnosc \n")
-        if wybor == '1':
-            argument = int(input("\n Podaj liczbe iteracji\n"))
+        if mt.value(przedzial_a,jakaFunkcja)*mt.value(przedzial_b,jakaFunkcja) < 0:
+            wybor = input("\n 1 - ilosc literacji; 2 - dokladnosc \n")
+            if wybor == '1':
+                argument = int(input("\n Podaj liczbe iteracji\n"))
+            else:
+                argument = float(input("\n Podaj epsilon\n"))
+            punkty_x = []
+            punkty_y = []
+            wynik = mt.choose_your_method(przedzial_a, przedzial_b, jakaFunkcja, argument, wybor)
+            print("\n Bisekcja: " + str(wynik[0][0])+" liczba iteracji: "+str(wynik[0][1]))
+            print("\n Sieczne: " + str(wynik[1][0])+" liczba iteracji: "+str(wynik[1][1]))
+            var = (przedzial_b - przedzial_a) / 1000
+            for i in range(1000):
+                przedzial_a += var
+                punkty_x.append(przedzial_a)
+                punkty_y.append(mt.value(przedzial_a, jakaFunkcja))
+            plt.plot(punkty_x, punkty_y)
+            plt.scatter(wynik[0][0], mt.value(wynik[0][0], jakaFunkcja), color='red', label='Bisekcja')
+            plt.scatter(wynik[1][0], mt.value(wynik[1][0], jakaFunkcja), color='blue', label='Sieczne')
+            plt.grid(visible=True)
+            plt.legend()
+            plt.show()
         else:
-            argument = float(input("\n Podaj epsilon\n"))
-        punkty_x = []
-        punkty_y = []
-        wynik = mt.choose_your_method(przedzial_a, przedzial_b, jakaFunkcja, argument, wybor)
-        print("\n Bisekcja: " + str(wynik[0][0])+" liczba iteracji: "+str(wynik[0][1]))
-        print("\n Sieczne: " + str(wynik[1][0])+" liczba iteracji: "+str(wynik[1][1]))
-        var = (przedzial_b - przedzial_a) / 1000
-        for i in range(1000):
-            przedzial_a += var
-            punkty_x.append(przedzial_a)
-            punkty_y.append(mt.value(przedzial_a, jakaFunkcja))
-        plt.plot(punkty_x, punkty_y)
-        plt.scatter(wynik[0][0], mt.value(wynik[0][0], jakaFunkcja), color='red', label='Bisekcja')
-        plt.scatter(wynik[1][0], mt.value(wynik[1][0], jakaFunkcja), color='blue', label='Sieczne')
-        plt.grid(visible=True)
-        plt.legend()
-        plt.show()
+            print("Brak miejsca zerowego w danym przedziale\n")
