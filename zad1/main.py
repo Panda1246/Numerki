@@ -1,4 +1,4 @@
-import math_helper as mt
+from zad1 import math_helper as mt
 import matplotlib.pyplot as plt
 
 czy_dziala = True

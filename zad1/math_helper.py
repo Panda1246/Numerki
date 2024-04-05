@@ -1,10 +1,13 @@
 import math
 
+
 def Horner_value(x, values, lenght):
     final_value = 0
     for i in range(lenght):
         final_value = final_value * x + values[i]
     return final_value
+
+
 def function_1(x, coffecients, length):
     return Horner_value(x, coffecients, length)
 
@@ -27,7 +30,7 @@ def function_5(x):
 
 def value(x, function):
     if function == '1':
-        return function_1(x, [1,-4,0,8,-23], 5)
+        return function_1(x, [1, -4, 0, 8, -23], 5)
     elif function == '2':
         return function_2(x)
     elif function == '3':
@@ -44,7 +47,7 @@ def bisection_iteration(a, b, function, iteration):
     while i < iteration:
         value_of_b = value(b, function)
         value_of_x = value(x, function)
-       # if math.fabs(value_of_x) <= 0.000001:
+        # if math.fabs(value_of_x) <= 0.000001:
         #    return x, i
         if (value_of_b < 0.0 and value_of_x < 0.0) | (value_of_b > 0.0 and value_of_x > 0.0):
             b = x
@@ -84,7 +87,7 @@ def secant_method_iteration(a, b, function, iteration):
             print("\nDivision by zero\n")
             return x, i
 
-        if  i == iteration:
+        if i == iteration:
             return x, i
         b = a
         a = x
