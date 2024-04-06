@@ -1,33 +1,39 @@
-
+import gauss_seidel as gs
 
 file = open(r"data.txt", "r")
-matrix = []
-rowna_sie=[]
-przyklad = []
-for i in file:
-    print(i)
-    line=[]
+file = file.read()
+sections = file.split('\n\n')
 
-    if i == "\n":
-        przyklad.append(rowna_sie)
-        rowna_sie=[]
-        matrix.append(przyklad)
-        przyklad=[]
-    else:
-        for j in i.split():
-            if j.isdigit():
-                line.append(float(j))
-            else:
-                var = ""
-                for k in j:
-                    if k == "|":
-                        line.append(float(var))
-                        var = ""
-                    else:
-                        var += str(k)
-                rowna_sie.append(float(var))
-        przyklad.append(line)
+while True:
+    print('Dostepne rownania:')
+    for i, section in enumerate(sections):
+        print(f'{i+1}:')
+        print(section)
+        print('')
+    choice = int(input('Choose a system: \n'))
 
-for i in matrix:
 
-    print(i)
+    coeffs_lines = sections[choice-1].split('\n')
+    A = []
+    b = []
+    for line in coeffs_lines:
+        coeffs = line.split('|')[0].split()
+        const = float(line.split('|')[1])
+
+        A.append([float(c) for c in coeffs])
+        b.append(const)
+    criterium = int(input("\nPodaj kryterium stopu: 1- ilosc iteracji, 2 - dokladnosc"))
+    if criterium == 1:
+        max_iter = int(input("Podaj maksymalna liczbe iteracji: "))
+        try:
+            x = gs.gauss_seidel_iteration(A, b, max_iter)
+            print(f'Wynik: {x}')
+        except ValueError as e:
+            print(e)
+    elif criterium == 2:
+        tol = float(input("Podaj dokladnosc: "))
+        try:
+            x = gs.gauss_seidel_precision(A, b, tol)
+            print(f'Wynik: {x}')
+        except ValueError as e:
+            print(e)
