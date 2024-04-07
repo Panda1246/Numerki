@@ -9,29 +9,30 @@ def sprawdzenie_przekatnej(A):
     return True
 
 
-def przestaw_wiersze(macierz):
+def przestaw_wiersze(macierz, b):
     n = len(macierz)
 
     for i in range(n):
         suma_wiersza = sum(abs(macierz[i][j]) for j in range(n) if i != j)
         if macierz[i][i] < suma_wiersza:
-            for j in range(i + 1, n):
+            for j in range(i+1,n):
                 suma_wiersza_j = sum(abs(macierz[j][k]) for k in range(n) if j != k)
-                if macierz[j][j] >= suma_wiersza_j:
-                    macierz[i], macierz[j] = macierz[j], macierz[i]
+                if macierz[j][i] >= suma_wiersza_j:
+                    macierz[i], macierz[j], b[i],b[j] = macierz[j], macierz[i],b[j],b[i]
                     break
             else:
-                return 1
-    return 0, macierz
+                return 1, macierz, b
+    return 0, macierz, b
 
 
 def gauss_seidel(A, b, tol, max_iteration):
     if not sprawdzenie_przekatnej(A):
-        wynik = przestaw_wiersze(A)
-        if wynik == 1:
+        wynik = przestaw_wiersze(A,b)
+        if wynik[0] == 1:
             print("Przekatna nie jest dominująca i nie da sie jej ustawic")
         else:
             A = wynik[1]
+            b = wynik[2]
     n = len(b)
     x0 = [0] * n
     x = x0.copy()
