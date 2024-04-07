@@ -22,18 +22,11 @@ while True:
 
         A.append([float(c) for c in coeffs])
         b.append(const)
-    criterium = int(input("\nPodaj kryterium stopu: 1- ilosc iteracji, 2 - dokladnosc"))
-    if criterium == 1:
-        max_iter = int(input("Podaj maksymalna liczbe iteracji: "))
-        try:
-            x = gs.gauss_seidel_iteration(A, b, max_iter)
-            print(f'Wynik: {x}')
-        except ValueError as e:
-            print(e)
-    elif criterium == 2:
-        tol = float(input("Podaj dokladnosc: "))
-        try:
-            x = gs.gauss_seidel_precision(A, b, tol)
-            print(f'Wynik: {x}')
-        except ValueError as e:
-            print(e)
+    max_iter = int(input("Podaj maksymalna liczbe iteracji: "))
+    tol = float(input("Podaj dokladnosc: "))
+    try:
+        x = gs.gauss_seidel(A, b, tol, max_iter)
+        print(f'Wynik: {x[0]}\nliczba iteracji: {x[1]}')
+    except ValueError as e:
+        print(e)
+    input("Kontynuwać?")
