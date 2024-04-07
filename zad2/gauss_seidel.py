@@ -1,10 +1,9 @@
-
 def sprawdzenie_przekatnej(A):
     for i in range(len(A)):
         suma = 0
         for j in range(len(A)):
-            if i!=j:
-                suma+=A[i][j]
+            if i != j:
+                suma += A[i][j]
         if abs(A[i][i]) < suma:
             return False
     return True
@@ -24,10 +23,12 @@ def przestaw_wiersze(macierz):
             else:
                 return 1
     return 0, macierz
+
+
 def gauss_seidel(A, b, tol, max_iteration):
-    if sprawdzenie_przekatnej(A) == False:
+    if not sprawdzenie_przekatnej(A):
         wynik = przestaw_wiersze(A)
-        if wynik[0] == 1:
+        if wynik == 1:
             print("Przekatna nie jest dominująca i nie da sie jej ustawic")
         else:
             A = wynik[1]
@@ -41,6 +42,4 @@ def gauss_seidel(A, b, tol, max_iteration):
             x[i] = (b[i] - sum_) / A[i][i]
         if all(abs(x[i] - x_old[i]) < tol for i in range(n)):
             return x, iteration
-    return x, iteration+1
-
-
+    return x, iteration + 1
