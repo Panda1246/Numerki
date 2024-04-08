@@ -22,8 +22,8 @@ while True:
 
         A.append([float(c) for c in coeffs])
         b.append(const)
-    max_iter = 15#int(input("Podaj maksymalna liczbe iteracji: "))
-    tol = 0.00001#float(input("Podaj dokladnosc: "))
+    max_iter =int(input("Podaj maksymalna liczbe iteracji: "))
+    tol = float(input("Podaj dokladnosc: "))
     try:
         x = gs.gauss_seidel(A, b, tol, max_iter)
         print(f'Wynik: {x[0]}\nliczba iteracji: {x[1]}')
