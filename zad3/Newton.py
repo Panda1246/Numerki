@@ -40,13 +40,15 @@ def value(x, function):
     elif function == '5':
         return function_5(x)
 
+
 def nodes(a, b, n):
     x = [0] * n
     x[0] = float(a)
     float(n)
-    for i in range(n-1):
-        x[i+1] = float(x[i]) + float(b-a)/float(n-1)
+    for i in range(n - 1):
+        x[i + 1] = float(x[i]) + float(b - a) / float(n - 1)
     return x
+
 
 def divided_diff(x, y):
     n = len(y)
@@ -58,6 +60,7 @@ def divided_diff(x, y):
             coef[j] = y[j]
     return coef
 
+
 def newton_interpolation(x, y, xi):
     n = len(x)
     coef = divided_diff(x, y)
@@ -68,9 +71,8 @@ def newton_interpolation(x, y, xi):
         result += coef[i] * temp
     return result
 
+
 def choice(a, b, n, function, x1):
     nodes_x = nodes(a, b, n)
     nodes_y = [value(x, function) for x in nodes_x]
     return newton_interpolation(nodes_x, nodes_y, x1)
-
-
