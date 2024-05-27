@@ -21,7 +21,7 @@ while czy_dziala:
         a = float(input("Podaj początek przedziału aproksymacji: "))
         b = float(input("Podaj koniec przedziału aproksymacji: "))
         degree = int(input("Podaj stopień wielomianu aproksymacyjnego: "))
-        num_nodes = degree + 1
+        num_nodes = degree
 
         x = np.linspace(a, b, num_nodes)
         y, dy = func(x)
@@ -34,6 +34,7 @@ while czy_dziala:
         error = np.abs(y_true - y_dense)
         print(f"Średni błąd aproksymacji: {np.mean(error[0])}")
         #print(f"Maksymalny błąd aproksymacji: {np.max(error)}")
+        print(f"Wzór otrzymanego wielomianu aproksymacyjnego:\n{mt.polynomial_to_string(coefficients, degree)}")
 
         plt.plot(x_dense, y_true[0], label="Funkcja oryginalna")
         plt.plot(x_dense, y_dense, label="Aproksymacja Hermite'a")

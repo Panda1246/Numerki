@@ -64,3 +64,11 @@ def hermite_interpolation_coefficients(x, y, dy):
     return z, Q.diagonal()
 
 
+def polynomial_to_string(coefficients, degree):
+    result = f"{coefficients[0]:.2f}"
+    for i in range(1, degree+1):
+        # if coefficients[i]==0:
+        #     continue
+        # else:
+        result += f" + {coefficients[i]:.2f}x^{i}"
+    return result
